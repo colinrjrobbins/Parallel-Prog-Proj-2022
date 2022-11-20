@@ -34,7 +34,7 @@ class SequentialSort:
                 count_high+=1
             elif count_high > 0:
                 return [count_high, j+1]
-            elif low:
+            else:
                 pass
 
     def sort_names(self):
