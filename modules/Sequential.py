@@ -15,7 +15,7 @@ class SequentialSort:
                 (self.nd[i],self.nd[j]) = (self.nd[j], self.nd[i])
 
         (self.nd[i+1],self.nd[high]) = (self.nd[high],self.nd[i+1])
-        
+
         return i + 1
 
     def quicksort(self, low: int, high: int, firstLast: str):
@@ -32,8 +32,10 @@ class SequentialSort:
         for j in range(low,high):
             if self.nd[j]['last'] == self.nd[j+1]['last']:
                 count_high+=1
-            else:
-                return count_high
+            elif count_high > 0:
+                return [count_high, j+1]
+            elif low:
+                pass
 
     def sort_names(self):
         print("\nSHOWING TOP 10 FROM FILE")
@@ -44,11 +46,16 @@ class SequentialSort:
         init = 0
         high = -1
 
-        while init != high:
+        while init < len(self.nd)-1:
             high = self.count_groups(init,len(self.nd)-1)
-            self.quicksort(init, high, 'first')
-            init = high
+            if high is None:
+                break
+            elif high[0] > 0:
+                self.quicksort(init, init+high[0], 'first')
+                init=high[1]
+            elif high[0] == 0:
+                init = high[1]
 
         print("\nSHOWING TOP 10 FROM SORT")
-        for i in range(0,10):
+        for i in range(0,len(self.nd)-1):
             print(self.nd[i]['first'] + ' ' + self.nd[i]['last'])
