@@ -1299,3 +1299,4 @@ Scripts/pythonw_d.exe
 Scripts/pythonw.exe
 requirements.txt
 pyvenv.cfg
+modules/__pycache__/__init__.cpython-310.pyc
