@@ -7,9 +7,6 @@ class SequentialSort:
     def partition(self, low: int, high: int, firstLast: str):
         pivot = self.nd[high][firstLast]
 
-        if firstLast == 'last':
-            lastFirst = 'first'
-
         i = low - 1
 
         for j in range(low, high):
@@ -29,15 +26,28 @@ class SequentialSort:
 
             self.quicksort(part+1, high, firstLast)
 
+    def count_groups(self, low: int, high: int):
+        count_high = 0
+
+        for j in range(low,high):
+            if self.nd[j]['last'] == self.nd[j+1]['last']:
+                count_high+=1
+            else:
+                return count_high
+
     def sort_names(self):
         print("\nSHOWING TOP 10 FROM FILE")
         for i in range(0,10):
             print(self.nd[i]['first'] + ' ' + self.nd[i]['last'])
 
-        input("\nPress enter to sort...")
-
         self.quicksort(0,len(self.nd)-1, 'last')
-        #self.quicksort(0,len(self.nd)-1, 'first')
+        init = 0
+        high = -1
+
+        while init != high:
+            high = self.count_groups(init,len(self.nd)-1)
+            self.quicksort(init, high, 'first')
+            init = high
 
         print("\nSHOWING TOP 10 FROM SORT")
         for i in range(0,10):
