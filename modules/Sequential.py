@@ -1,5 +1,5 @@
 import time
-
+import multiprocessing as mp
 class SequentialSort:
     def __init__(self, name_dict : dict):
         self.nd = name_dict
@@ -23,7 +23,7 @@ class SequentialSort:
             part = self.partition(low, high, firstLast)
 
             self.quicksort(low, part - 1, firstLast)
-
+            
             self.quicksort(part+1, high, firstLast)
 
     def count_groups(self, low: int, high: int):
@@ -37,11 +37,13 @@ class SequentialSort:
             elif low:
                 pass
 
-    def sort_names(self):
-        # print("\nSHOWING TOP 10 FROM FILE")
-        # for i in range(0,10):
-        #     print(self.nd[i]['first'] + ' ' + self.nd[i]['last'])
-
+    def sort_names(self, portion_dict = None):
+        # Added portion in to be able to pass in smaller portions of code, None by default
+        if portion_dict != None:
+            self.nd = portion_dict
+        else:
+            pass
+        
         self.quicksort(0,len(self.nd)-1, 'last')
         init = 0
         high = -1
@@ -56,6 +58,6 @@ class SequentialSort:
             elif high[0] == 0:
                 init = high[1]
 
-        # print("\nSHOWING TOP 10 FROM SORT")
-        # for i in range(0,100):
-        #     print(self.nd[i]['first'] + ' ' + self.nd[i]['last'])
+        # added a return to pass the data back to ParallelSort class
+        return self.nd
+
