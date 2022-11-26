@@ -17,15 +17,16 @@ class ParallelSort:
             self.close_threads(thread_pool)
             print("Error creating threads: " + str(e))
             os.close()
-        return thread_pool
+        self.thread_pool = thread_pool
+        return self.thread_pool
 
     def close_threads(self, thread_pool):
         thread_pool.close()
 
     def sort_names(self):
         try:
-            # Initialize threads
-            thread_pool = self.initialize_threads()
+            # grab threads that have been initialized in main.py
+            thread_pool = self.thread_pool
             split_dict = int(mp.cpu_count())
 
             initial = 0
