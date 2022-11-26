@@ -1,14 +1,15 @@
 from modules.FileData import get_file_data
 from modules.Parallel import ParallelSort
 from modules.Sequential import SequentialSort
+from modules.Parallel_2 import ParallelSortTwo
 from multiprocessing import freeze_support
 
 import time
 
 if __name__ == '__main__':
-    # Name file to import 
+    # Name file to import
     FILE = 'files/names.txt'
-    
+
     # Import file names as DICT {Key: {'first': <value>,'last':<value>}}
     name_dict = get_file_data(FILE)
 
@@ -32,4 +33,17 @@ if __name__ == '__main__':
     start_par_sort = time.time()
     par_result = par.sort_names()
     end_par_sort = time.time()
+
     print("Total Time for Parallel: " + str(end_par_sort - start_par_sort))
+
+    # Parallel runtime with a different approach
+    par_two = ParallelSortTwo(name_dict)
+    # thread initialization not required in time counting
+    par_two.initialize_threads()
+
+    start_par_two_sort = time.time()
+    par_two_result = par_two.sort_names()
+    end_par_two_sort = time.time()
+
+
+    print("Total Time for ParallelTwo: " + str(end_par_two_sort - start_par_two_sort))
