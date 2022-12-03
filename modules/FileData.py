@@ -15,4 +15,6 @@ def get_file_data(filename : str):
         name_dict[x] = {"first":name.split(' ')[0],"last":name.split(' ')[1]}
         x = x + 1
 
+    name_file.close()
+
     return name_dict
