@@ -35,8 +35,15 @@ class QuickSort:
                 self.quicksort(low, part-1, firstLast)
                 self.quicksort(part+1, high, firstLast)
             else:
-                self.thread_pool.apply_async(self.quicksort, (low, part - 1, firstLast))
-                self.thread_pool.apply_async(self.quicksort, (part+1, high, firstLast))
+                try:
+                    # self.thread_pool.apply_async(self.quicksort, (low, part - 1, firstLast))
+                    # self.thread_pool.apply_async(self.quicksort, (part+1, high, firstLast))
+                    self.thread_pool.apply_async(self.quicksort, (low, part - 1, firstLast))
+                    self.thread_pool.apply_async(self.quicksort, (part+1, high, firstLast))
+                except Exception as e:
+                    print("Error called: " + str(e))
+                    print("Closing threads.")
+                    self.thread_pool.close()
 
     def count_groups(self, low: int, high: int):
         group_size = 0

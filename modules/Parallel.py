@@ -1,6 +1,7 @@
 import time
 import threading
 import multiprocessing as mp
+from multiprocessing.pool import ThreadPool
 from modules.Quicksort import QuickSort
 import os
 
@@ -11,7 +12,7 @@ class ParallelSort:
     def initialize_threads(self):
         # declare threads that can be used.
         try:
-            thread_pool = mp.Pool(mp.cpu_count())
+            thread_pool = ThreadPool(mp.cpu_count())
         except Exception as e:
             self.close_threads(thread_pool)
             print("Error creating threads: " + str(e))
@@ -28,7 +29,7 @@ class ParallelSort:
 
         self.nd = self.name_dict
 
-        quick_class.quicksort(0,len(self.nd)-1, 'last')
+        quick_class.quicksort(0, len(self.nd)-1, 'last')
         init = 0
         high = -1
 
@@ -36,7 +37,7 @@ class ParallelSort:
         quick_class.switch_parallel_sequential()
 
         while init < len(self.nd)-1:
-            high = quick_class.count_groups(init,len(self.nd)-1)
+            high = quick_class.count_groups(init, len(self.nd)-1)
             if high is None:
                 break
             elif high[0] > 0:
