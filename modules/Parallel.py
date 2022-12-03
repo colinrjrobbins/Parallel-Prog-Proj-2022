@@ -23,13 +23,17 @@ class ParallelSort:
         thread_pool.close()
 
     def sort_names(self, thread_pool):
-        quick_class = QuickSort(self.name_dict, 1, thread_pool)
+        # Attempted starting with sequential
+        quick_class = QuickSort(self.name_dict, 0, thread_pool)
 
         self.nd = self.name_dict
 
         quick_class.quicksort(0,len(self.nd)-1, 'last')
         init = 0
         high = -1
+
+        # switch from sequential to parallel
+        quick_class.switch_parallel_sequential()
 
         while init < len(self.nd)-1:
             high = quick_class.count_groups(init,len(self.nd)-1)

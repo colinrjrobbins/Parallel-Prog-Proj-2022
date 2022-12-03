@@ -8,6 +8,12 @@ class QuickSort:
         self.PorS = parallelOrSequential
         self.thread_pool = thread_pool
 
+    def switch_parallel_sequential(self):
+        if self.PorS == 0:
+            self.PorS = 1
+        else:
+            self.PorS = 0
+
     def partition(self, low: int, high: int, firstLast: str):
         pivot = self.nd[high][firstLast]
 

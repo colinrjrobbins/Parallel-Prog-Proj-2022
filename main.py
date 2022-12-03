@@ -64,9 +64,9 @@ if __name__ == '__main__':
     par2_result = par2.sort_names(thread_pool)
     end_par_sort = time.time()
 
-    par_time = end_par_sort - start_par_sort
+    par2_time = end_par_sort - start_par_sort
 
-    print("Total Time for Parallel2: " + str(par_time))
+    print("Total Time for Parallel2: " + str(par2_time))
 
     par2_file = open('files/parallel2_names_sorted.txt','w')
     for x in range(0,len(par2_result)):
