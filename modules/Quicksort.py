@@ -14,6 +14,9 @@ class QuickSort:
         else:
             self.PorS = 0
 
+    def update_thread_pool(self, thread_object):
+        self.thread_pool = thread_object
+
     def partition(self, low: int, high: int, firstLast: str):
         pivot = self.nd[high][firstLast]
 
