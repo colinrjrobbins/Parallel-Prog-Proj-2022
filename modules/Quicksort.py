@@ -7,6 +7,7 @@ class QuickSort:
         self.nd = name_dict    
         self.PorS = parallelOrSequential
         self.thread_pool = thread_pool
+        self.lock = mp.Lock()
 
     def switch_parallel_sequential(self):
         if self.PorS == 0:

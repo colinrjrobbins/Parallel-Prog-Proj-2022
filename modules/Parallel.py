@@ -29,11 +29,10 @@ class ParallelSort:
         # Attempted starting with sequential
         #quick_class = QuickSort(self.name_dict, 0, thread_pool)
 
-        #self.quick_class.switch_parallel_sequential()
+        self.quick_class.switch_parallel_sequential()
 
         self.quick_class.update_thread_pool(thread_pool)
-        self.nd = self.name_dict
-        self.quick_class.quicksort(0, len(self.nd)-1, 'last')
+        self.quick_class.quicksort(0, len(self.name_dict)-1, 'last')
         
         init = 0
         high = -1
@@ -41,8 +40,8 @@ class ParallelSort:
         # switch from sequential to parallel
         self.quick_class.switch_parallel_sequential()
 
-        while init < len(self.nd)-1:
-            high = self.quick_class.count_groups(init, len(self.nd)-1)
+        while init < len(self.name_dict)-1:
+            high = self.quick_class.count_groups(init, len(self.name_dict)-1)
             if high is None:
                 break
             elif high[0] > 0:
@@ -53,4 +52,4 @@ class ParallelSort:
                 init = high[1]
 
         # added a return to pass the data back to ParallelSort class
-        return self.nd
+        return self.name_dict
