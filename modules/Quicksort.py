@@ -22,12 +22,11 @@ class QuickSort:
         pivot = self.nd[high][firstLast]
 
         i = low - 1
-
         for j in range(low, high):
             if self.nd[j][firstLast] <= pivot:
                 i = i + 1
                 (self.nd[i],self.nd[j]) = (self.nd[j], self.nd[i])
-
+                
         (self.nd[i+1],self.nd[high]) = (self.nd[high],self.nd[i+1])
 
         return i + 1
@@ -43,13 +42,12 @@ class QuickSort:
                     self.thread_pool.apply_async(self.quicksort, (low, part - 1, firstLast))
                     self.thread_pool.apply_async(self.quicksort, (part+1, high, firstLast))
                 except Exception as e:
-                    print("Error called: " + str(e))
+                    print("Error called: QuickSort Class : quicksort Method : " + str(e))
                     print("Closing threads.")
                     self.thread_pool.close()
 
     def count_groups(self, low: int, high: int):
         group_size = 0
-
         for j in range(low,high):
             if self.nd[j]['last'] == self.nd[j+1]['last']:
                 group_size = group_size + 1

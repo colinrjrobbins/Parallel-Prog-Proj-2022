@@ -29,7 +29,7 @@ if __name__ == '__main__':
         seq_file.write(seq_result[x]['first'] + ' ' + seq_result[x]['last'] + '\n')
     seq_file.close()
 
-    # ============================================
+    # ============ PARALLEL DEVELOPMENT ==============
 
     # reset to a clean DICT for parallel processing
     name_dict = get_file_data(FILE)
@@ -52,7 +52,7 @@ if __name__ == '__main__':
         par_file.write(par_result[x]['first'] + ' ' + par_result[x]['last'] + '\n')
     par_file.close()
 
-    # ===========================================
+    # ============== PARALLEL 2 DEVELOPMENT ==============
 
     name_dict = get_file_data(FILE)
 
@@ -73,6 +73,8 @@ if __name__ == '__main__':
         par2_file.write(par2_result[x]['first'] + ' ' + par2_result[x]['last'] + '\n')
     par2_file.close()
 
+    
+
     if seq_time > par_time:
         lapse = seq_time / par_time
         print("\nParallel is ~" + str(round(lapse, 2)) + "x faster.")
@@ -80,6 +82,8 @@ if __name__ == '__main__':
         lapse = par_time / seq_time
         print("\nSequential is ~" + str(round(lapse, 2)) + "x faster.")
     
+    # ====== OPEN AND READ FILES FOR COMPARISON ===========
+
     seq_file_data = open('files/sequential_names_sorted.txt','r').readlines()
     par_file_data = open('files/parallel_names_sorted.txt','r').readlines()
 

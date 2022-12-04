@@ -25,9 +25,17 @@ class ParallelSort:
     def close_threads(self, thread_pool):
         thread_pool.close()
 
+    # def last_name_count(self,name_dict : dict):
+    #     '''last_name_count: take in last name sorted and count distinct names'''
+    #     name_count = []
+    #     for name in range(0,len(self.name_dict)):
+    #         count = 0
+
+    #         for x in range(0, len(self.name_dict)):
+
+
     def sort_names(self, thread_pool):
         # Attempted starting with sequential
-        #quick_class = QuickSort(self.name_dict, 0, thread_pool)
 
         self.quick_class.switch_parallel_sequential()
 
@@ -38,17 +46,19 @@ class ParallelSort:
         high = -1
 
         # switch from sequential to parallel
-        self.quick_class.switch_parallel_sequential()
+        
 
+        
         while init < len(self.name_dict)-1:
+            #self.quick_class.switch_parallel_sequential()
             high = self.quick_class.count_groups(init, len(self.name_dict)-1)
             if high is None:
                 break
             elif high[0] > 0:
-                with self.lock:
-                    self.quick_class.quicksort(init, init+high[0], 'first')
+                self.quick_class.quicksort(init, init+high[0], 'first')
                 init=high[1]
             elif high[0] == 0:
+                print(str(init))
                 init = high[1]
 
         # added a return to pass the data back to ParallelSort class
