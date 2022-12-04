@@ -9,6 +9,7 @@ class ParallelSort:
     def __init__(self, name_dict : dict):
         self.name_dict = name_dict
         self.quick_class = QuickSort(self.name_dict,1)
+        self.lock = mp.Lock()
         
     def initialize_threads(self):
         # declare threads that can be used.
@@ -28,11 +29,12 @@ class ParallelSort:
         # Attempted starting with sequential
         #quick_class = QuickSort(self.name_dict, 0, thread_pool)
 
+        #self.quick_class.switch_parallel_sequential()
+
         self.quick_class.update_thread_pool(thread_pool)
-
         self.nd = self.name_dict
-
         self.quick_class.quicksort(0, len(self.nd)-1, 'last')
+        
         init = 0
         high = -1
 
@@ -44,7 +46,8 @@ class ParallelSort:
             if high is None:
                 break
             elif high[0] > 0:
-                self.quick_class.quicksort(init, init+high[0], 'first')
+                with self.lock:
+                    self.quick_class.quicksort(init, init+high[0], 'first')
                 init=high[1]
             elif high[0] == 0:
                 init = high[1]

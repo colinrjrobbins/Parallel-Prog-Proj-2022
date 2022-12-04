@@ -39,8 +39,6 @@ class QuickSort:
                 self.quicksort(part+1, high, firstLast)
             else:
                 try:
-                    # self.thread_pool.apply_async(self.quicksort, (low, part - 1, firstLast))
-                    # self.thread_pool.apply_async(self.quicksort, (part+1, high, firstLast))
                     self.thread_pool.apply_async(self.quicksort, (low, part - 1, firstLast))
                     self.thread_pool.apply_async(self.quicksort, (part+1, high, firstLast))
                 except Exception as e:
@@ -53,7 +51,7 @@ class QuickSort:
 
         for j in range(low,high):
             if self.nd[j]['last'] == self.nd[j+1]['last']:
-                group_size+=1
+                group_size = group_size + 1
             elif group_size > 0:
                 return [group_size, j+1]
             elif low:

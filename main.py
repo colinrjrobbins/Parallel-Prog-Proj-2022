@@ -79,3 +79,20 @@ if __name__ == '__main__':
     else:
         lapse = par_time / seq_time
         print("Sequential is ~" + str(round(lapse, 2)) + "x faster.")
+    
+    seq_file = open('files/sequential_names_sorted.txt','r')
+    par_file = open('files/parallel_names_sorted.txt','r')
+
+    for x in range(0,10000):
+        line1 = seq_file.readline(x)
+        line2 = par_file.readline(x)
+        if line1 != line2:
+            nomatch = 1
+            break
+        else:
+            nomatch = 0
+
+    if nomatch == 1:
+        print("Files do not match.")
+    else:
+        print("Files match.")
