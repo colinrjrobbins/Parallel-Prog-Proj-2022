@@ -63,8 +63,9 @@ class QuickSort:
                 self.quicksort(part+1, high)
             else:
                 try:
-                    self.thread_pool.map(self.quicksort, [(low, part - 1),(part+1,high)])
-                    #self.thread_pool.submit(self.quicksort, (part+1, high))
+                    #self.thread_pool.map(self.quicksort, [(low, part - 1),(part+1,high)])
+                    self.thread_pool.submit(self.quicksort, (low, part-1))
+                    self.thread_pool.submit(self.quicksort, (part+1, high))
                 except Exception as e:
                     print("Error called: QuickSort Class : quicksort Method : " + str(e))
                     print("Closing threads.")
@@ -83,7 +84,7 @@ class QuickSort:
                         pass
             else:
                 for j in range(low,high):
-                    if self.nd[j][self.firstLast] == self.nd[j+1][self.firstLast]:#if self.nd[j]['last'] == self.nd[j+1]['last']:
+                    if self.nd[j]['last'] == self.nd[j+1]['last']:
                         group_size = group_size + 1
                     elif group_size > 0:
                         return [group_size, j+1]
