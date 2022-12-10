@@ -9,16 +9,19 @@ class SequentialSort:
     def sort_names(self):
         quick_class = QuickSort(self.nd, 0)
 
-        quick_class.quicksort(0,len(self.nd)-1, 'last')
+        quick_class.quicksort(0,len(self.nd)-1)
         init = 0
         high = -1
 
+        quick_class.update_first_last()
+
         while init < len(self.nd)-1:
             high = quick_class.count_groups(init,len(self.nd)-1)
+            #print(high)
             if high is None:
                 break
             elif high[0] > 0:
-                quick_class.quicksort(init, init+high[0], 'first')
+                quick_class.quicksort(init, init+high[0])
                 init=high[1]
             elif high[0] == 0:
                 init = high[1]

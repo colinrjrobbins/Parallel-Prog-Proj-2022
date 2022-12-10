@@ -32,10 +32,10 @@ if __name__ == '__main__':
     # ============ PARALLEL DEVELOPMENT ==============
 
     # reset to a clean DICT for parallel processing
-    name_dict = get_file_data(FILE)
+    name_dict2 = get_file_data(FILE)
 
     # Parallel runtime
-    par = ParallelSort(name_dict)
+    par = ParallelSort(name_dict2)
     # thread initialization not required in time counting
     thread_pool = par.initialize_threads()
 
@@ -54,9 +54,9 @@ if __name__ == '__main__':
 
     # ============== PARALLEL 2 DEVELOPMENT ==============
 
-    name_dict = get_file_data(FILE)
+    name_dict3 = get_file_data(FILE)
 
-    par2 = ParallelSortTwo(name_dict)
+    par2 = ParallelSortTwo(name_dict3)
     # thread initialization not required in time counting
     thread_pool = par2.initialize_threads()
 
