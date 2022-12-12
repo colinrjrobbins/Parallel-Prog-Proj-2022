@@ -37,25 +37,32 @@ class ParallelSort:
     def sort_names(self, thread_pool):
         # Attempted starting with sequential
 
-        self.quick_class.switch_parallel_sequential()
+        #self.quick_class.switch_parallel_sequential()
 
         self.quick_class.update_thread_pool(thread_pool)
         self.quick_class.quicksort(0, len(self.name_dict)-1, 'last')
         
+        #return self.name_dict
         init = 0
         high = -1
 
         # switch from sequential to parallel
-        
+        self.quick_class.switch_parallel_sequential()
 
-        
+        #print(self.quick_class.nd)
+        time.sleep(0.0001)
+
+        self.quick_class.switch_parallel_sequential()
+
         while init < len(self.name_dict)-1:
             #self.quick_class.switch_parallel_sequential()
-            high = self.quick_class.count_groups(init, len(self.name_dict)-1)
+            with self.lock:
+                high = self.quick_class.count_groups(init, len(self.name_dict)-1)
             if high is None:
                 break
             elif high[0] > 0:
-                self.quick_class.quicksort(init, init+high[0], 'first')
+                with self.lock:
+                    self.quick_class.quicksort(init, init+high[0], 'first')
                 init=high[1]
             elif high[0] == 0:
                 print(str(init))
