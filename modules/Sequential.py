@@ -7,6 +7,7 @@ class SequentialSort:
         self.nd = name_dict
 
     def sort_names(self):
+        '''Sort the names by last name then first name sequentially.'''
         quick_class = QuickSort(self.nd, 0)
 
         quick_class.quicksort(0,len(self.nd)-1, 'last')

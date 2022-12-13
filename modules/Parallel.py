@@ -13,7 +13,7 @@ class ParallelSort:
         self.length = len(self.name_dict)-1
         
     def initialize_threads(self):
-        # declare threads that can be used.
+        '''Initialize the threads for the class based on CPU count.'''
         try:
             thread_pool = ThreadPool(mp.cpu_count())
         except Exception as e:
@@ -24,10 +24,12 @@ class ParallelSort:
         return self.thread_pool
 
     def close_threads(self, thread_pool):
+        '''Close and join the threads.'''
         thread_pool.close()
         thread_pool.join()
         
     def sort_names(self, thread_pool):
+        '''Sort the names with locking implementation for parallel processing.'''
         self.quick_class.update_thread_pool(thread_pool)
         with self.lock:
             self.quick_class.quicksort(0, self.length, 'last')

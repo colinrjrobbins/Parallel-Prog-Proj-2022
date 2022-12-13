@@ -44,14 +44,14 @@ if __name__ == '__main__':
 
     par_time = end_par_sort - start_par_sort
 
-    #thread_pool.close()
-
     print("Total Time for Parallel: " + str(par_time))
     
     par_file = open('files/parallel_names_sorted.txt','w')
     for x in range(0,len(par_result)):
         par_file.write(par_result[x]['first'] + ' ' + par_result[x]['last'] + '\n')
     par_file.close()
+
+    # ======= DETERMINE TOTAL SPEED DIFFERENCE ===========
 
     if seq_time > par_time:
         lapse = seq_time / par_time
