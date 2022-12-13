@@ -26,7 +26,7 @@ class QuickSort:
             if self.nd[j][firstLast] <= pivot:
                 i = i + 1
                 (self.nd[i],self.nd[j]) = (self.nd[j], self.nd[i])
-                
+
         (self.nd[i+1],self.nd[high]) = (self.nd[high],self.nd[i+1])
 
         return i + 1
@@ -50,7 +50,8 @@ class QuickSort:
         group_size = 0
         for j in range(low,high):
             if self.nd[j]['last'] == self.nd[j+1]['last']:
-                group_size = group_size + 1
+                with self.lock:
+                    group_size = group_size + 1
             elif group_size > 0:
                 return [group_size, j+1]
             elif low:

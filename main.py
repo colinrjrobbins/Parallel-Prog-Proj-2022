@@ -1,7 +1,6 @@
 from modules.FileData import get_file_data
 from modules.Parallel import ParallelSort
 from modules.Sequential import SequentialSort
-from modules.Parallel_2 import ParallelSortTwo
 
 import time
 
@@ -45,35 +44,14 @@ if __name__ == '__main__':
 
     par_time = end_par_sort - start_par_sort
 
+    #thread_pool.close()
+
     print("Total Time for Parallel: " + str(par_time))
     
     par_file = open('files/parallel_names_sorted.txt','w')
     for x in range(0,len(par_result)):
         par_file.write(par_result[x]['first'] + ' ' + par_result[x]['last'] + '\n')
     par_file.close()
-
-    # ============== PARALLEL 2 DEVELOPMENT ==============
-
-    name_dict = get_file_data(FILE)
-
-    par2 = ParallelSortTwo(name_dict)
-    # thread initialization not required in time counting
-    thread_pool = par2.initialize_threads()
-
-    start_par_sort = time.time()
-    par2_result = par2.sort_names(thread_pool)
-    end_par_sort = time.time()
-
-    par2_time = end_par_sort - start_par_sort
-
-    print("Total Time for Parallel2: " + str(par2_time))
-
-    par2_file = open('files/parallel2_names_sorted.txt','w')
-    for x in range(0,len(par2_result)):
-        par2_file.write(par2_result[x]['first'] + ' ' + par2_result[x]['last'] + '\n')
-    par2_file.close()
-
-    
 
     if seq_time > par_time:
         lapse = seq_time / par_time

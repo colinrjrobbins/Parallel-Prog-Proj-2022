@@ -12,6 +12,7 @@ class SequentialSort:
         quick_class.quicksort(0,len(self.nd)-1, 'last')
         init = 0
         high = -1
+        #return self.nd
 
         while init < len(self.nd)-1:
             high = quick_class.count_groups(init,len(self.nd)-1)
